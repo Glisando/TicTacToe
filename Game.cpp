@@ -22,7 +22,7 @@ void Game::Start(void)
     while (!std::regex_match(_input, result, multi));
 
     _multiplayer = result[1] == "y" ? true : false;
-    (_multiplayer == true) ? multiplayerGame() : (void)NULL;
+    (_multiplayer == true) ? multiplayerGame() : GameWithAI();
 }
 
 char Game::getStep()

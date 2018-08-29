@@ -1,6 +1,7 @@
 #ifndef GAME_HPP
 # define GAME_HPP
 
+# include "AI.hpp"
 # include "Board.hpp"
 
 # include <iostream>
@@ -29,6 +30,10 @@ class Game
         void singleGame(void);
         void chooseCharacter(void);
         char getStep();
+        void GameWithAI();
+        AIMove getBestMove(Board &board, char Player);
+        int chooseBestMove(std::vector<AIMove> moves, char player);
+
 };
 
 #endif

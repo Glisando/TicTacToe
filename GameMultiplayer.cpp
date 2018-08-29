@@ -7,8 +7,8 @@ void Game::multiplayerGame(void)
     _turn = 'O';
     while (!_gameOver)
     {
-        std::cout << "Player " << _turn << "'s turn" << std::endl;
         board.printDesk();
+        std::cout << "Player " << _turn << "'s turn" << std::endl;
         do{}
         while (!board.setDesk(getStep(), _turn));
         board.printDesk();        
