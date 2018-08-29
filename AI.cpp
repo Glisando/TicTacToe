@@ -1,7 +1,7 @@
 #include "AI.hpp"
 
 AIMove::AIMove() {}
-AIMove::AIMove(int sc) : score(sc) {}
+AIMove::AIMove(int sc) : x(0), y(0), score(sc) {}
 AIMove::AIMove(AIMove const &ref) { *this = ref; }
 AIMove::~AIMove() {}
 

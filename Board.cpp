@@ -82,7 +82,7 @@ bool Board::checkEndOfGame(char _turn)
        res = true;
     else if (_desk[0][0] == _desk[1][1] && _desk[1][1] == _desk[2][2])
        res = true;
-    else if (_desk[0][2] == _desk[1][1] && _desk[1][1] == _desk[3][1])
+    else if (_desk[0][2] == _desk[1][1] && _desk[1][1] == _desk[2][0])
        res = true;
     else
     {
@@ -106,21 +106,21 @@ char Board::checkEndOfGame(char p1, char p2)
     char res = '-';
 
     if (_desk[0][0] == _desk[0][1] && _desk[0][1] == _desk[0][2])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[0][0] == p1 ? p1 : p2;
     else if (_desk[1][0] == _desk[1][1] && _desk[1][1] == _desk[1][2])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[1][0] == p1 ? p1 : p2;
     else if (_desk[2][0] == _desk[2][1] && _desk[2][1] == _desk[2][2])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[2][0] == p1 ? p1 : p2;
     else if (_desk[0][0] == _desk[1][0] && _desk[1][0] == _desk[2][0])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[0][0] == p1 ? p1 : p2;
     else if (_desk[0][1] == _desk[1][1] && _desk[1][1] == _desk[2][1])
        res =_desk[0][1] == p1 ? p1 : p2;
     else if (_desk[0][2] == _desk[1][2] && _desk[1][2] == _desk[2][2])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[0][2] == p1 ? p1 : p2;
     else if (_desk[0][0] == _desk[1][1] && _desk[1][1] == _desk[2][2])
-       res =_desk[0][1] == p1 ? p1 : p2;
-    else if (_desk[0][2] == _desk[1][1] && _desk[1][1] == _desk[3][1])
-       res =_desk[0][1] == p1 ? p1 : p2;
+       res =_desk[0][0] == p1 ? p1 : p2;
+    else if (_desk[0][2] == _desk[1][1] && _desk[1][1] == _desk[2][0])
+       res =_desk[0][2] == p1 ? p1 : p2;
     else
     {
         for (int i = 0; i < 3; i++)
@@ -130,7 +130,6 @@ char Board::checkEndOfGame(char p1, char p2)
             else
                 return (res);
         }
-        std::cout << "Nobody win's" << std::endl;
         return ('N');
     }
     return (res);

@@ -6,12 +6,12 @@ void Game::GameWithAI()
     chooseCharacter();
     _turn = 'O';
 
-    while (!_gameOver)
+    while (1)
     {
-        board.printDesk();
         if (_turn == _Player1)
         {
             std::cout << "It's your turn" << std::endl;
+            board.printDesk();
             do{}
             while (!board.setDesk(getStep(), _turn));
         }
@@ -21,6 +21,8 @@ void Game::GameWithAI()
             move = getBestMove(board, _turn);
             board.setDesk(move, _turn);
         }
+        if (board.checkEndOfGame(_turn))
+            break ;
         _turn = _turn == _Player1 ? _AIPlayer : _Player1;
     }
 }
@@ -32,7 +34,7 @@ AIMove Game::getBestMove(Board &board, char Player)
         return AIMove(10);
     else if (ch == _Player1)
         return AIMove(-10);
-    else if (ch == '-')
+    else if (ch == 'N')
         return AIMove(0);
 
     std::vector<AIMove> moves;
@@ -45,7 +47,6 @@ AIMove Game::getBestMove(Board &board, char Player)
             {
                 AIMove move;
                 // char pc;
-                
                 move.x = x;
                 move.y = y;
                 board.setDesk(move, Player);
@@ -72,10 +73,10 @@ int Game::chooseBestMove(std::vector<AIMove> moves, char player)
     
     if (player == _Player1)
     {
-        Bscore = -99999999;
+        Bscore = 99999999;
         for (size_t i = 0; i < moves.size(); i++)
         {
-            if (moves[i].score > Bscore)
+            if (moves[i].score < Bscore)
             {
                 Bmove = i;
                 Bscore = moves[i].score;
@@ -84,10 +85,10 @@ int Game::chooseBestMove(std::vector<AIMove> moves, char player)
     }
     else
     {
-        Bscore = 99999999;
+        Bscore = -99999999;
         for (size_t i = 0; i < moves.size(); i++)
         {
-            if (moves[i].score < Bscore)
+            if (moves[i].score > Bscore)
             {
                 Bmove = i;
                 Bscore = moves[i].score;
