@@ -6,6 +6,7 @@
 
 # include <iostream>
 # include <regex>
+# include <string>
 
 class Game
 {

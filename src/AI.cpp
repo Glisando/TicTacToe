@@ -1,4 +1,4 @@
-#include "AI.hpp"
+#include "../inc/AI.hpp"
 
 AIMove::AIMove() {}
 AIMove::AIMove(int sc) : x(0), y(0), score(sc) {}

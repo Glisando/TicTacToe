@@ -1,6 +1,6 @@
-#include "Game.hpp"
+#include "../inc/Game.hpp"
 
-Game::Game() : _gameOver(false), _multiplayer(false), _Player1('-'), _Player2('-'), _AIPlayer('-'), _turn(0) {}
+Game::Game() : _gameOver(false), _multiplayer(false), _Player1('-'), _Player2('-'), _AIPlayer('-'), _turn('X') {}
 Game::Game(Game const &ref) { *this = ref; }
 Game::~Game() {}
 
@@ -10,10 +10,16 @@ Game &Game::operator=(Game const &ref)
     return *this;
 }
 
+/**
+ *  Here I'm start my program and ask user some data
+*/ 
+
 void Game::Start(void)
 {
     std::regex multi("\\s*(y|n)\\s*");
     std::smatch result;
+    
+    std::cout << std::endl << "Character X always start the game!" << std::endl << std::endl;
     do
     {
         std::cout << "Multiplayer? (y / n): ";
@@ -25,11 +31,15 @@ void Game::Start(void)
     (_multiplayer == true) ? multiplayerGame() : GameWithAI();
 }
 
+/**
+ * Getting step from user
+*/ 
+
 char Game::getStep()
 {
     char step;
     std::string input;
-    std::regex coord("\\s*([1-9])\\s*");
+    std::regex check_field("\\s*([1-9])\\s*");
     std::smatch result;
 
     do
@@ -37,7 +47,7 @@ char Game::getStep()
         std::cout << "Enter the number of field, please [1-9]: ";
         std::getline(std::cin, input);
     }
-    while (!std::regex_match(input, result, coord));
+    while (!std::regex_match(input, result, check_field));
     std::string tmp = result[1];
     step = tmp[0];
     return (step);

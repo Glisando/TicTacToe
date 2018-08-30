@@ -37,6 +37,9 @@
         "new": "cpp",
         "optional": "cpp",
         "string_view": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp",
+        "__locale": "cpp"
     }
 }

@@ -1,10 +1,12 @@
-#include "Board.hpp"
+#include "../inc/Board.hpp"
 
 Board::Board()
 {
     char x = '1';
-
-    for (int i = 0; i < 3; i++)
+/**
+ * Loop for setting numbers to fields.
+*/
+    for (int i = 0; i < 3; i++) 
     {
         _desk.push_back(std::vector<char>());
         for (int j = 0; j < 3; j++)
@@ -30,11 +32,19 @@ std::vector< std::vector<char> > Board::getDesk()
     return _desk;
 }
 
+/**
+ * Setting the character to the desk with coordinates of field directly.
+*/
+
 void Board::setDesk(AIMove &move, char Player)
 {
     move.place = _desk[move.x][move.y]; 
     _desk[move.x][move.y] = Player;
 }
+
+/**
+ * Setting the player character to the desk by finding desired field.
+*/
 
 bool Board::setDesk(char step, char ch)
 {
@@ -52,21 +62,32 @@ bool Board::setDesk(char step, char ch)
     return (false);
 }
 
+/**
+ * Just print the Desk.
+*/
+
 void Board::printDesk()
 {
+    std::cout << std::endl;
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            std::cout << _desk[i][j] << " ";
+            std::cout << _desk[i][j] << "  ";
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
 }
+
+/**
+ * This function check win conditions.
+*/
 
 bool Board::checkEndOfGame(char _turn)
 {
     bool res = false;
+
+    // if some of this conditions true - it means game over and somebody won
 
     if (_desk[0][0] == _desk[0][1] && _desk[0][1] == _desk[0][2])
        res = true;
@@ -91,19 +112,29 @@ bool Board::checkEndOfGame(char _turn)
             if (_desk[i][0] >= 'O' && _desk[i][1] >= 'O' && _desk[i][2] >= 'O')
                 continue ;
             else
-                return (false);
+                return (false); // it means that game isn't over
         }
-        std::cout << "Nobody win's" << std::endl;
+        std::cout << std::endl << "Nobody won !" << std::endl;
+        printDesk();        
         return (true);
     }
     if (res)
-        std::cout << "Player " << _turn << " win's !!!" << std::endl;
+    {
+        std::cout << std::endl << "Player " << _turn << " won !!!" << std::endl; 
+        printDesk(); // game over
+    }
     return (res);
 }
 
+/**
+ * This function check win conditions too.
+ * But, have another parameters for use in recusrion.
+*/
 char Board::checkEndOfGame(char p1, char p2)
 {
     char res = '-';
+
+    // if some of this conditions true - it means game over and somebody won
 
     if (_desk[0][0] == _desk[0][1] && _desk[0][1] == _desk[0][2])
        res =_desk[0][0] == p1 ? p1 : p2;
@@ -128,11 +159,11 @@ char Board::checkEndOfGame(char p1, char p2)
             if (_desk[i][0] >= 'O' && _desk[i][1] >= 'O' && _desk[i][2] >= 'O')
                 continue ;
             else
-                return (res);
+                return (res); // it means the game isn't over
         }
-        return ('N');
+        return ('N'); // case if nobody won
     }
-    return (res);
+    return (res); // it means the game isn't over
 }
 
 char Board::getValue(int x, int y)
